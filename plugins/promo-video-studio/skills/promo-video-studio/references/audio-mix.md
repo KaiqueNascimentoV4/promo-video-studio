@@ -1,7 +1,7 @@
 # Áudio e mix
 
 ## Âncoras: transcrição que "erra" palavras
-O Whisper escreve números em algarismo ("30" em vez de "trinta") e às vezes grafa a marca diferente ("Naturales"). Antes de montar âncoras/cenas, corrija o texto dessas palavras no `.words.json` (os tempos continuam certos) — senão `kw('n3','trinta')` falha. Marca transcrita diferente nem sempre é pronúncia errada: avise o usuário para ouvir.
+O Whisper escreve números em algarismo ("30" em vez de "trinta") e às vezes grafa o nome da marca diferente. Antes de montar âncoras/cenas, corrija o texto dessas palavras no `.words.json` (os tempos continuam certos) — senão `kw('n3','trinta')` falha. Marca transcrita diferente nem sempre é pronúncia errada: avise o usuário para ouvir.
 Pausas longas da voz: `python scripts/tighten_pauses.py audio/*.mp3` (pausas internas > 0,38 s viram 0,28 s; originais em `audio/orig/`).
 
 ## Sumário
