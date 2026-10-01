@@ -1,5 +1,9 @@
 # Animação HTML → vídeo
 
+## Packshot de produto em fundo branco
+Recorte automático (flood fill a partir das bordas) **vaza** quando o produto também é branco (latas, potes, rótulos claros). Em vez de brigar com o recorte, use a foto inteira como "foto" num **card branco arredondado** com sombra (perfil de app, vitrine, grid) — fica limpo e sem borda serrilhada. Se precisar mesmo do recorte, peça PNG com transparência ao cliente.
+Logo da marca: procure o `<svg>` no header da landing (vetor, nítido em qualquer tamanho); se a landing usar iframe, abra a URL do iframe direto.
+
 ## Sumário
 1. Princípio do engine
 2. Estrutura do template (`assets/template.html`)
