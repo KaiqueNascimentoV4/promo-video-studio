@@ -27,10 +27,16 @@ def git(*a, check=True): return subprocess.run(['git', '-C', root, *a], capture_
 BAD = [(r'gh[pousr]_[A-Za-z0-9]{20,}', 'token do GitHub'), (r'sk-[A-Za-z0-9_-]{20,}', 'chave de API'), (r'xi-api-key|ELEVENLABS_API_KEY\s*=\s*\S+', 'chave ElevenLabs'),
        (r'[A-Za-z]:[\\/]+Users[\\/]+(?!<you>)[A-Za-z0-9_.-]+', 'caminho de usuário'), (r'/Users/(?!<you>)[a-z0-9_.-]+/', 'caminho de usuário'),
        (r'[A-Za-z0-9._%+-]+@(?!htfonts|anthropic)[A-Za-z0-9.-]+\.(com|br|io|net)\b', 'e-mail')]
+# nomes de clientes (lista LOCAL, fora do repo): ~/.claude/promo-video-studio-clientes.txt, um por linha
+_bl = os.path.expanduser('~/.claude/promo-video-studio-clientes.txt')
+if os.path.exists(_bl):
+    for nome in open(_bl, encoding='utf-8').read().splitlines():
+        if nome.strip() and not nome.startswith('#'): BAD.append((r'(?i)' + re.escape(nome.strip()), 'nome de cliente'))
 problems = []
 changed = [l[3:].strip().strip('"') for l in git('status', '--porcelain', '-uall').stdout.splitlines()]
 for rel in changed:
     p = os.path.join(root, rel)
+    if os.path.realpath(p) == os.path.realpath(__file__): continue  # o próprio verificador contém os padrões
     if not os.path.isfile(p) or os.path.splitext(p)[1].lower() in ('.ttf', '.otf', '.png', '.jpg', '.mp3', '.wav', '.mp4'): continue
     txt = open(p, encoding='utf-8', errors='ignore').read()
     for pat, what in BAD:
