@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Promo Template</title>
+<!-- 1) Troque as fontes pelas da marca (Google Fonts). Gochi Hand = anotações à mão. -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Geist+Mono:wght@400;500;600&family=Gochi+Hand&display=block" rel="stylesheet">
+<style>
+  /* 2) Identidade da marca: troque estas variáveis (extraídas do :root da landing) */
+  :root{ --bg:#F6F3EC; --ink:#17130E; --dim:#6f685c; --line:rgba(23,19,14,.10); --accent:#4F46E5; --accent2:#8A82F7; --accent-rgb:79,70,229;
+         --font-title:'Manrope',sans-serif; --font-body:'DM Sans',sans-serif; --font-mono:'Geist Mono',monospace; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg)}
+  body{font-family:var(--font-body);color:var(--ink);-webkit-font-smoothing:antialiased}
+  #stage{position:absolute;inset:0;overflow:hidden;background:var(--bg)}
+  .scene{position:absolute;inset:0;overflow:hidden;display:none}
+  #dots{position:absolute;inset:-60px;background-image:radial-gradient(circle, rgba(23,19,14,.075) 1.2px, transparent 1.7px);background-size:30px 30px}
+  .blob{position:absolute;left:0;top:0;border-radius:50%}
+  #b1{width:1400px;height:1400px;margin:-700px 0 0 -700px;background:radial-gradient(circle, rgba(var(--accent-rgb),.15) 0%, rgba(var(--accent-rgb),.05) 38%, rgba(var(--accent-rgb),0) 68%)}
+  #grain{position:absolute;left:-256px;top:-256px;width:2432px;height:1592px;opacity:.05;mix-blend-mode:multiply;pointer-events:none;background-size:512px 512px}
+  #flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+  .label{font-family:var(--font-mono);font-size:20px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:500}
+  .h1{font-family:var(--font-title);font-weight:800;letter-spacing:-.045em;line-height:1.02}
+  .mask{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
+  .mask>span{display:inline-block}
+  .ind{color:var(--accent)}
+  .hand{position:absolute;font-family:'Gochi Hand',cursive;white-space:nowrap;line-height:1;color:var(--accent)}
+  .hand.ink{color:var(--ink)} .hand.white{color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.45)}
+  svg.ov{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:visible;pointer-events:none}
+  svg.ov path{fill:none;stroke:var(--accent);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round}
+  /* S1 gancho */
+  #s1t{position:absolute;left:0;right:0;top:250px;text-align:center;font-size:120px}
+  #cnum{position:absolute;left:0;right:0;top:470px;text-align:center;font-family:var(--font-title);font-weight:800;font-size:260px;letter-spacing:-.05em;color:var(--accent);line-height:1}
+  /* S2 marca */
+  #orb{position:absolute;left:660px;top:200px}
+  #brand{position:absolute;left:0;right:0;top:820px;text-align:center;font-family:var(--font-title);font-weight:800;font-size:110px;letter-spacing:-.05em}
+  /* S3 produto (UI recriada) */
+  .ui{position:absolute;left:0;top:0;width:1920px;height:1080px;background:#fff;transform-origin:0 0}
+  .ui .side{position:absolute;left:0;top:0;bottom:0;width:260px;background:#F7F6FB;border-right:1px solid #ecebf3;padding:34px 26px}
+  .ui .logo{font-family:var(--font-title);font-weight:800;font-size:36px;letter-spacing:-.04em}
+  .ui .nav div{padding:13px 16px;border-radius:12px;font-size:19px;color:#5b5670;margin-top:6px}
+  .ui .nav div.on{background:rgba(var(--accent-rgb),.12);color:var(--accent);font-weight:600}
+  .ui .main{position:absolute;left:260px;top:0;right:0;padding:44px 60px}
+  .ui h2{font-family:var(--font-title);font-weight:800;font-size:44px;letter-spacing:-.03em}
+  .ui .sub{font-size:20px;color:var(--dim);margin-top:6px}
+  .tr{position:absolute;left:320px;width:1540px;height:96px;border-top:1px solid #efeef4;display:grid;grid-template-columns:700px 300px 300px 240px;align-items:center;padding-left:24px;font-size:24px;background:#fff}
+  .tr:before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:6px;border-radius:3px;background:var(--accent)}
+  .pill{justify-self:center;min-width:190px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:20px}
+  .ok{justify-self:center;display:flex;gap:10px;align-items:center;color:#1f7a45;font-weight:600;font-size:19px}
+  .ok i{width:38px;height:38px;border-radius:50%;background:#22c55e;display:inline-block}
+  /* S4 card final */
+  #endc{background:#000}
+  #endlogo{position:absolute;left:0;right:0;top:380px;text-align:center;font-family:var(--font-title);font-weight:800;font-size:150px;letter-spacing:-.05em;color:#fff}
+  #endlogo i{color:var(--accent2);font-style:normal}
+  #endtag{position:absolute;left:0;right:0;top:580px;text-align:center;font-family:var(--font-title);font-weight:500;font-size:46px;color:#fff}
+  #endcta{position:absolute;left:0;right:0;top:760px;text-align:center;color:#d9d9d9;font-size:30px}
+  /* camadas para o pacote Premiere */
+  body.L-base .hand, body.L-base svg.ov{visibility:hidden !important}
+  body.L-doodle, body.L-text, body.L-doodle #stage, body.L-text #stage, body.L-doodle .scene, body.L-text .scene{background:transparent !important}
+  body.L-doodle #stage > :not(.scene), body.L-doodle .scene > :not(svg.ov){visibility:hidden !important}
+  body.L-text #stage > :not(.scene), body.L-text .scene > :not(.hl-layer){visibility:hidden !important}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="dots"></div><div class="blob" id="b1"></div>
+  <svg width="0" height="0" style="position:absolute"><defs id="defs"></defs></svg>
+
+  <div class="scene" id="s1">
+    <div id="s1t" class="h1"><span class="mask"><span id="s1l">Toda semana sua equipe perde</span></span></div>
+    <div id="cnum">0h</div>
+    <svg class="ov" id="o1"></svg><div class="hl-layer" id="h1"></div>
+  </div>
+
+  <div class="scene" id="s2">
+    <canvas id="orb" width="600" height="600"></canvas>
+    <div id="brand">acme<span class="ind">.</span></div>
+  </div>
+
+  <div class="scene" id="s3" style="background:#fff">
+    <div class="ui" id="ui3">
+      <div class="side"><div class="logo">acme<span class="ind">.</span></div><div class="nav" style="margin-top:40px"><div class="on">Relatórios</div><div>Painéis</div><div>Equipe</div></div></div>
+      <div class="main"><h2>Relatórios da semana</h2><div class="sub">Gerados automaticamente · segunda, 08:00</div></div>
+    </div>
+    <svg class="ov" id="o3"></svg><div class="hl-layer" id="h3"></div>
+  </div>
+
+  <div class="scene" id="endc">
+    <div id="endlogo">acme<i>.</i></div>
+    <div id="endtag"><span class="mask"><span id="tagl">Trabalhe no que importa.</span></span></div>
+    <div id="endcta">Comece grátis → acme.com</div>
+  </div>
+  <div id="grain"></div><div id="flash"></div>
+</div>
+
+<script src="anchors.js"></script>
+<script>
+// ================= ENGINE (genérico) =================
+const W = 1920, H = 1080, FPS = 60;
+const K = window.K, O = K.__offset, DUR = K.__dur;
+const k = n => { if (!(n in K)) throw new Error('âncora ausente: ' + n); return K[n] + O; };
+const $ = id => document.getElementById(id);
+const cl = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, x) => a + (b - a) * x;
+const pr = (t, a, b) => cl((t - a) / (b - a));
+const E = { outCubic: x => 1 - Math.pow(1 - x, 3), inCubic: x => x * x * x, inOutCubic: x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2,
+  outExpo: x => x >= 1 ? 1 : 1 - Math.pow(2, -10 * x), inExpo: x => x <= 0 ? 0 : Math.pow(2, 10 * x - 10),
+  outBack: x => { const c1 = 1.6, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); } };
+function rng(seed) { let s = seed >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+const NS = 'http://www.w3.org/2000/svg';
+
+// motion blur (filtro SVG por elemento, proporcional à velocidade)
+let fid = 0;
+function mb(el, sx, sy = 0) { if (!el._g) { const f = document.createElementNS(NS, 'filter'); el._f = 'mb' + (fid++); f.setAttribute('id', el._f);
+    ['x', 'y'].forEach(a => f.setAttribute(a, '-30%')); ['width', 'height'].forEach(a => f.setAttribute(a, '160%')); const g = document.createElementNS(NS, 'feGaussianBlur'); f.appendChild(g); $('defs').appendChild(f); el._g = g; }
+  sx = Math.min(Math.abs(sx), 70); sy = Math.min(Math.abs(sy), 70); if (sx < .3 && sy < .3) { el.style.filter = 'none'; return; }
+  el._g.setAttribute('stdDeviation', sx.toFixed(2) + ' ' + sy.toFixed(2)); el.style.filter = `url(#${el._f})`; }
+// entrada/saída lateral com motion blur (use em cenas kinetic)
+function whip(el, t, a, b, amp = .28) { const f = tt => lerp(W * amp, 0, E.outExpo(pr(tt, a, a + .4))) + lerp(0, -W * amp, E.inExpo(pr(tt, b - .28, b)));
+  const x = f(t); el.style.transform = `translateX(${x}px)`; mb(el, Math.abs(x - f(t - 1 / FPS)) * .42); }
+// texto subindo por trás de máscara
+function maskIn(el, t, t0, dur = .6) { el.style.transform = `translateY(${((1 - E.outExpo(pr(t, t0, t0 + dur))) * 110).toFixed(2)}%)`; }
+// câmera sobre UI: keys = [[t, escala, focoX, focoY], ...]
+function cam(el, t, keys) { let c = keys[0]; for (let i = 0; i < keys.length - 1; i++) if (t >= keys[i][0]) { const p = E.inOutCubic(pr(t, keys[i][0], keys[i + 1][0])); c = [0, lerp(keys[i][1], keys[i + 1][1], p), lerp(keys[i][2], keys[i + 1][2], p), lerp(keys[i][3], keys[i + 1][3], p)]; }
+  const s = c[1], tx = cl(960 - c[2] * s, W - W * s, 0), ty = cl(540 - c[3] * s, H - H * s, 0); el.style.transform = `translate(${tx}px,${ty}px) scale(${s})`; return [s, tx, ty]; }
+
+// anotações à mão que se escrevem + traços/setas desenhados
+const ANN = [];
+function hand(parent, x, y, text, size, t0, opts = {}) { const d = document.createElement('div'); d.className = 'hand ' + (opts.cls || ''); d.style.left = x + 'px'; d.style.top = y + 'px'; d.style.fontSize = size + 'px';
+  d.style.transform = `rotate(${opts.rot || 0}deg)`; d.innerHTML = text; $(parent).appendChild(d);
+  ANN.push({ el: d, t0, dur: opts.dur ?? Math.max(.3, text.replace(/<[^>]+>/g, '').length * .04), type: 'text', text, size, rot: opts.rot || 0, cls: opts.cls || '' }); return d; }
+function stroke(svg, d, t0, dur = .4) { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); $(svg).appendChild(p); const L = p.getTotalLength();
+  p.style.strokeDasharray = L; p.style.strokeDashoffset = L; ANN.push({ el: p, t0, dur, type: 'path', L }); }
+function arrow(svg, x1, y1, x2, y2, bend, t0, dur = .35) { const mx = (x1 + x2) / 2, my = (y1 + y2) / 2, dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy) || 1, cx = mx - dy / len * bend, cy = my + dx / len * bend;
+  stroke(svg, `M${x1} ${y1} Q${cx} ${cy} ${x2} ${y2}`, t0, dur); const tx = x2 - cx, ty = y2 - cy, tl = Math.hypot(tx, ty) || 1, ux = tx / tl, uy = ty / tl, h = 20;
+  stroke(svg, `M${x2 - h * (ux * .87 - uy * .5)} ${y2 - h * (uy * .87 + ux * .5)} L${x2} ${y2} L${x2 - h * (ux * .87 + uy * .5)} ${y2 - h * (uy * .87 - ux * .5)}`, t0 + dur, .12); }
+function renderAnn(t) { for (const a of ANN) { const p = pr(t, a.t0, a.t0 + a.dur);
+  if (a.type === 'text') { a.el.style.clipPath = `inset(-20% ${(100 - p * 100).toFixed(1)}% -30% -5%)`; a.el.style.opacity = p > 0 ? 1 : 0; }
+  else { a.el.style.strokeDashoffset = (a.L * (1 - E.outCubic(p))).toFixed(1); a.el.style.opacity = p > 0 ? 1 : 0; } } }
+
+// esfera pontilhada (halftone) — elemento de marca "tech" reutilizável
+function drawOrb(cv, t, amp, R0) { const g = cv.getContext('2d'), w = cv.width, cx = w / 2, cy = w / 2, R = (R0 ?? w * .42) * (1 + .06 * amp), st = Math.max(6, Math.round(R / 26)); g.clearRect(0, 0, w, w);
+  const a = t * .5, ca = Math.cos(a), sa = Math.sin(a), rgb = getComputedStyle(document.documentElement).getPropertyValue('--accent-rgb').trim();
+  for (let y = cy - R; y <= cy + R; y += st) { const off = (Math.round((y - cy) / st) & 1) ? st / 2 : 0;
+    for (let x = cx - R - st + off; x <= cx + R + st; x += st) { const nx = (x - cx) / R, ny = (y - cy) / R, d2 = nx * nx + ny * ny; if (d2 > 1) continue;
+      const nz = Math.sqrt(1 - d2), X = nx * ca + nz * sa, Z = -nx * sa + nz * ca, p = .5 + .5 * Math.sin(X * 6.5 + ny * 4.2 + t * 1.8) * Math.cos(ny * 5.5 - Z * 3 - t * 1.2);
+      const l = cl(-.35 * nx - .45 * ny + .82 * nz), s = st * .46 * (.18 + .82 * (.6 * p + .4 * l)) * (.35 + .65 * cl((1 - Math.sqrt(d2)) * 6));
+      if (s < .4) continue; g.fillStyle = `rgba(${rgb},${(.28 + .62 * p).toFixed(3)})`; g.beginPath(); g.arc(x, y, s, 0, 7); g.fill(); } } }
+const voice = t => cl(.5 + .3 * Math.sin(t * 9.1) + .2 * Math.sin(t * 15.7 + 1), 0, 1);
+
+(() => { const c = document.createElement('canvas'); c.width = c.height = 512; const g = c.getContext('2d'), d = g.createImageData(512, 512), r = rng(7);
+  for (let i = 0; i < d.data.length; i += 4) { const v = 128 + (r() - .5) * 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; } g.putImageData(d, 0, 0); $('grain').style.backgroundImage = `url(${c.toDataURL()})`; })();
+
+// ================= ROTEIRO (troque por projeto) =================
+// cenas derivadas das âncoras: { id: [inicio, fim] }
+const S = { s1: [0, k('marca1') - .45], s2: [k('marca1') - .45, k('relatorios') - .2], s3: [k('relatorios') - .2, k('marca2') - .1], endc: [k('marca2') - .1, DUR] };
+const CUTS = Object.values(S).map(v => v[0]).filter(x => x > 0);
+const ROWS = [['Vendas por região', 'Pronto', '#00C875'], ['Funil do trimestre', 'Pronto', '#00C875'], ['Churn de clientes', 'Atualizando', '#FDAB3D']];
+const rowEls = ROWS.map(([n, s, c], i) => { const e = document.createElement('div'); e.className = 'tr'; e.style.top = (260 + i * 110) + 'px';
+  e.innerHTML = `<span>${n}</span><span style="color:var(--dim)">Seg, 08:00</span><span class="pill" style="background:${c}">${s}</span><span class="ok"><i></i>Enviado</span>`; $('ui3').appendChild(e); return e; });
+let built = false;
+function build() { if (built) return; built = true;
+  hand('h1', 1250, 760, 'por pessoa!', 80, k('repete'), { rot: -6 }); arrow('o1', 1300, 740, 1180, 640, 30, k('repete') + .4);
+  hand('h3', 1320, 120, 'sem planilha!', 64, k('sozinhos'), { rot: -4 }); arrow('o3', 1420, 200, 1240, 270, -30, k('sozinhos') + .35);
+}
+
+function render(t) {
+  build();
+  for (const id in S) $(id).style.display = (t >= S[id][0] && t < S[id][1]) ? 'block' : 'none';
+  let fz = 0; for (const c of CUTS) { const d = t - c; if (d >= 0 && d < .16) fz = Math.max(fz, 1 - d / .16); } $('flash').style.opacity = (fz * .22).toFixed(3);
+  const gr = rng(Math.round(t * FPS) * 9 + 3); $('grain').style.transform = `translate(${(gr() * 256) | 0}px,${(gr() * 256) | 0}px)`;
+  $('dots').style.transform = `translate(${(-t * 6) % 30}px,${(-t * 3) % 30}px)`; $('b1').style.transform = `translate(${960 + Math.sin(t * .3) * 300}px,${540 + Math.cos(t * .25) * 160}px)`;
+  // S1 gancho: frase + contador
+  if (t < S.s1[1]) { maskIn($('s1l'), t, k('gancho')); const cp = E.inOutCubic(pr(t, k('seis') - .3, k('horas') + .2)); $('cnum').textContent = Math.round(cp * 6) + 'h';
+    const pop = E.outBack(pr(t, k('seis') - .3, k('seis') + .2)); $('cnum').style.transform = `scale(${lerp(.7, 1, pop)})`; $('cnum').style.opacity = cl(pr(t, k('seis') - .3, k('seis') - .1)); }
+  // S2 marca: esfera + nome
+  if (t >= S.s2[0] && t < S.s2[1]) { const p = E.outBack(pr(t, S.s2[0], S.s2[0] + .5)); $('orb').style.transform = `scale(${lerp(.3, 1, p)})`; drawOrb($('orb'), t, voice(t), 240);
+    const lp = E.outExpo(pr(t, k('marca1'), k('marca1') + .5)); $('brand').style.opacity = lp; $('brand').style.transform = `translateY(${lerp(30, 0, lp)}px)`; }
+  // S3 produto: linhas entram, câmera dá zoom na coluna de status
+  if (t >= S.s3[0] && t < S.s3[1]) { cam($('ui3'), t, [[S.s3[0], 1.08, 960, 520], [k('relatorios') + .5, 1.0, 960, 540], [k('sozinhos') - .3, 1.0, 960, 540], [k('sozinhos') + .3, 1.6, 1500, 400], [k('painel'), 1.6, 1500, 400], [k('painel') + .5, 1.0, 960, 540]]);
+    rowEls.forEach((e, i) => { const t0 = k('relatorios') + i * .25, p = E.outBack(pr(t, t0, t0 + .45)); e.style.opacity = cl(pr(t, t0, t0 + .12)); e.style.transform = `translateX(${lerp(-60, 0, E.outExpo(pr(t, t0, t0 + .45)))}px) scale(${lerp(.97, 1, p)})`; }); }
+  // card final
+  if (t >= S.endc[0]) { const lp = E.outExpo(pr(t, S.endc[0] + .05, S.endc[0] + .6)); $('endlogo').style.opacity = lp; $('endlogo').style.transform = `scale(${lerp(.85, 1, lp)})`; $('endlogo').style.filter = `blur(${(1 - lp) * 10}px)`;
+    maskIn($('tagl'), t, k('tagline'), .7); $('endcta').style.opacity = E.outCubic(pr(t, k('fim'), k('fim') + .6)); }
+  renderAnn(t);
+}
+
+// ================= API para render.mjs / premiere_package.py =================
+window.__render = render;
+window.__scenes = () => Object.entries(S).map(([id, [a, b]]) => ({ id, a, b }));
+window.__setLayer = m => { document.body.classList.remove('L-base', 'L-doodle', 'L-text'); if (m) document.body.classList.add('L-' + m); if (m === 'doodle' || m === 'text') document.documentElement.style.background = 'transparent'; };
+window.__annExport = () => ANN.filter(a => a.type === 'text').map(a => { const sc = Object.values(S).find(([x, y]) => a.t0 >= x && a.t0 < y); const end = sc ? sc[1] : DUR;
+  render(Math.min(end - .02, a.t0 + a.dur + .25)); const r = a.el.getBoundingClientRect(); const m = new DOMMatrix(getComputedStyle(a.el.parentElement).transform);
+  return { text: a.text.split(/<br\s*\/?>/).join(String.fromCharCode(10)), start: a.t0, end, cx: r.left + r.width / 2, cy: r.top + r.height / 2, size: a.size * (Math.hypot(m.a, m.b) || 1), rot: a.rot, cls: a.cls }; });
+window.__ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 1 : new Promise(r => i.onload = i.onerror = r))));
+const qs = new URLSearchParams(location.search); window.__ready.then(() => { if (qs.has('t')) render(parseFloat(qs.get('t'))); });
+</script>
+</body>
+</html>
