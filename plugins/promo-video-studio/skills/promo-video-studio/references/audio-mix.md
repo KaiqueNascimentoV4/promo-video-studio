@@ -1,5 +1,11 @@
 # Áudio e mix
 
+## Uma narração só, cortada em frases
+Gere o roteiro inteiro num nó (mais barato e com entonação contínua) e posicione cada frase no tempo da animação: lista `(frase, 1ª palavra, última palavra, início no vídeo)` → `atrim` de cada trecho + `adelay`, e as âncoras de cada palavra = início da frase no vídeo + (tempo da palavra − início do trecho). Comece o trecho ~0,1 s antes da 1ª palavra (sem invadir a frase anterior) e termine 0,12 s depois da última.
+
+## Trilha encobrindo o começo das frases
+Sintoma: o Whisper do mix final troca a 1ª palavra de algumas frases ("Telas"→"Delas", "Pediu"→"O vídeo"), mas a **voz isolada** transcreve certo. Causa: a trilha está no volume cheio quando a frase começa e o sidechain reage tarde. Correções, nesta ordem: (1) **sidechain antecipado** — alimente o `sidechaincompress` com uma cópia da narração adiantada 0,2 s (os trechos com `adelay` = início − 0,2), ratio 6, threshold 0.02; (2) nenhum SFX com pico em cima da 1ª sílaba (impacto de card final em cima da marca é o clássico); (3) se ainda falhar, abaixe a trilha uns 4 dB só durante aquela frase (`volume='if(between(t,a,b),0.6,1)':eval=frame`). Sempre compare a transcrição da voz isolada com a do mix para saber se é mascaramento ou só a transcrição.
+
 ## Âncoras: transcrição que "erra" palavras
 O Whisper escreve números em algarismo ("30" em vez de "trinta") e às vezes grafa o nome da marca diferente. Antes de montar âncoras/cenas, corrija o texto dessas palavras no `.words.json` (os tempos continuam certos) — senão `kw('n3','trinta')` falha. Marca transcrita diferente nem sempre é pronúncia errada: avise o usuário para ouvir.
 Pausas longas da voz: `python scripts/tighten_pauses.py audio/*.mp3` (pausas internas > 0,38 s viram 0,28 s; originais em `audio/orig/`).

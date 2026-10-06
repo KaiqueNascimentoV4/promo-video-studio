@@ -1,5 +1,12 @@
 # Animação HTML → vídeo
 
+## Logo em SVG com clip-path / path único
+Muitos logos vêm como um único `<path>` (marca + textos) com `clip-path`; recortar só a marca mudando o `viewBox` pode sair cortado. Caminho robusto: abra o SVG no Chromium (Playwright) em 2× e faça `screenshot({omitBackground:true, clip})` de cada parte → PNG transparente (gere versões trocando `fill` por cada cor da marca). Ache o retângulo da marca rasterizando o logo inteiro e procurando a faixa vazia entre marca e texto.
+
+## Catálogo do cliente como fonte de produtos
+Lojas com catálogo online costumam expor a foto de cada produto numa URL estável (ex. `/api/public/products/<id>/image`). Raspe nome/preço/categoria/id do DOM (role a página até o fim para carregar tudo), escolha ~50 itens visuais cobrindo as categorias e baixe as fotos (o usuário pedir "pegue os prints no sistema deles" autoriza). Fotos de embalagem em fundo branco viram ótimas **figurinhas** (card branco arredondado + contorno na cor da marca + sombra) — pré-renderize cada figurinha num canvas e desenhe tudo num `<canvas>` (dezenas de itens voando por quadro sem pesar).
+**Mosaico que forma o logo:** desenhe o PNG da marca num canvas fora da tela, amostre uma grade (célula ~33 px) e mantenha as células com alpha alto em 4 de 5 pontos; as figurinhas que estavam na tela voam para as primeiras células e o resto entra em onda do centro para fora; ponha a silhueta da marca a ~16% atrás para o desenho ler.
+
 ## Packshot de produto em fundo branco
 Recorte automático (flood fill a partir das bordas) **vaza** quando o produto também é branco (latas, potes, rótulos claros). Em vez de brigar com o recorte, use a foto inteira como "foto" num **card branco arredondado** com sombra (perfil de app, vitrine, grid) — fica limpo e sem borda serrilhada. Se precisar mesmo do recorte, peça PNG com transparência ao cliente.
 Logo da marca: procure o `<svg>` no header da landing (vetor, nítido em qualquer tamanho); se a landing usar iframe, abra a URL do iframe direto.
