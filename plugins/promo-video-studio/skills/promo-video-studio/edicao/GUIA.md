@@ -1,8 +1,3 @@
----
-name: edicao
-description: Guia interno de edição da skill promo-video-studio, com cinco modos para takes, Reels, motion e remake. O formulário de entrada e a aprovação criativa estão no SKILL.md principal.
----
-
 # Editar vídeo: fluxos da central única
 
 Este guia reúne os fluxos de edição de vídeo curto: decupagem, legenda dinâmica, cor, SFX, trilha, motion de UI, motion livre e remake frame a frame. Faça o briefing e obtenha aprovação do plano antes de produzir.
@@ -37,7 +32,7 @@ Primeira vez nesta máquina? Rode `python scripts/config.py --check` (veja o §4
 
 ## 2. Briefing do modo (as perguntas mudam por modo)
 
-O arquivo do modo diz quais perguntas fazer. O banco de perguntas está em `references/briefing.md`: textos prontos para o AskUserQuestion, com as opções e quando pular cada uma. Em resumo:
+O arquivo do modo diz quais perguntas fazer. O banco de perguntas está em `references/briefing.md`: textos e opções que podem ser apresentados pela ferramenta de perguntas disponível ou em mensagem. Em resumo:
 
 - **Material**: onde estão os takes/arquivos (pasta ou arquivos arrastados). Modos 4 e 5: assets, logo, referência.
 - **Formato**: 9:16 1080×1920 (padrão) · 4:5 · 1:1 · 16:9. **Duração-alvo.**
@@ -71,7 +66,7 @@ Sempre que o vídeo for para um cliente (modos 1, 2, 4, 5 e, se tiver CTA ou mar
 - Precisa de **ffmpeg** (com libass/zscale), **Python 3.10+** (`pip install faster-whisper numpy opencv-python pillow`) e **Node 18+** (`npm i playwright` + `npx playwright install chromium`) para motion/remake.
 - Voz local: `python scripts/voz_local.py --instalar` (ambiente isolado `~/.venvs/voz` com PyTorch CUDA, Chatterbox e Kokoro).
 - Opcionais que turbinam: skills HyperFrames (`npx hyperframes`), `rembg`/`npx hyperframes remove-background` (recorte da pessoa), Real-ESRGAN (upscale de material fraco), GPU NVIDIA para o Whisper.
-- **Caminhos pessoais ficam fora do repo**, em `~/.claude/editar-video.json`. O `scripts/config.py` lê e grava esse arquivo: pack de SFX, trilhas, fontes, LUTs, pasta de saída, WhatsApp padrão. Nunca escreva caminho pessoal dentro da skill.
+- **Caminhos pessoais ficam fora do repo**. `scripts/config.py` usa `~/.claude/editar-video.json` por compatibilidade com instalações existentes; em qualquer agente, `PROMO_VIDEO_STUDIO_CONFIG` pode apontar para outro JSON local. Guarde ali pack de SFX, trilhas, fontes, LUTs, pasta de saída e WhatsApp padrão.
 
 Scripts prontos (`scripts/`, rode com o caminho absoluto da skill; todos têm `--help`):
 

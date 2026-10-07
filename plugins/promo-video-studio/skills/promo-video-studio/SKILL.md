@@ -9,7 +9,7 @@ Central única para vídeos promocionais e edição de material bruto. Para come
 
 ## Formulário inicial e escolha do fluxo
 
-Quando o usuário disser `editar video iniciar`, pedir um vídeo ou uma edição sem detalhar o fluxo, apresente o formulário em duas rodadas curtas. Use `AskUserQuestion` se disponível (até quatro opções por pergunta); em outra interface, mostre as opções numeradas em texto. **Não repita perguntas já respondidas no pedido.**
+Quando o usuário disser `editar video iniciar`, pedir um vídeo ou uma edição sem detalhar o fluxo, apresente o formulário em duas rodadas curtas. Use a ferramenta de perguntas da interface, se houver; caso contrário, mostre as opções numeradas em texto. **Não repita perguntas já respondidas no pedido.**
 
 **Rodada 1 — O que vamos fazer?**
 
@@ -22,8 +22,8 @@ Quando o usuário disser `editar video iniciar`, pedir um vídeo ou uma edição
 
 **Rodada 2 — somente para o caminho escolhido:**
 
-- **Editar gravações:** `1 · Reels completo` (cortes, legenda, cor, trilha, SFX e cenas de motion); `2 · Reels intermediário` (sem cenas de motion); `3 · Decupagem + legenda` (sem trilha/SFX criativos). Leia `edicao/SKILL.md` e o arquivo do modo em `edicao/references/`.
-- **Motion ou referência:** `4 · Motion livre` (ideia original ou inspirada em referência); `5 · Remake 1:1` (reconstrução quadro a quadro, com aviso de custo). Leia `edicao/SKILL.md` e o arquivo do modo. A análise e os arquivos editáveis de After Effects/Premiere deste guia continuam disponíveis no modo 4.
+- **Editar gravações:** `1 · Reels completo` (cortes, legenda, cor, trilha, SFX e cenas de motion); `2 · Reels intermediário` (sem cenas de motion); `3 · Decupagem + legenda` (sem trilha/SFX criativos). Leia `edicao/GUIA.md` e o arquivo do modo em `edicao/references/`.
+- **Motion ou referência:** `4 · Motion livre` (ideia original ou inspirada em referência); `5 · Remake 1:1` (reconstrução quadro a quadro, com aviso de custo). Leia `edicao/GUIA.md` e o arquivo do modo. A análise e os arquivos editáveis de After Effects/Premiere deste guia continuam disponíveis no modo 4.
 
 Após a escolha, recolha apenas os dados que faltam: objetivo e público, material e referência, marca/MIV, formato e duração, texto ou fala, áudio desejado e entrega final (MP4, fontes, **After Effects editável**, Premiere editável). O briefing específico do fluxo completa o formulário. Nos guias de `edicao/`, caminhos como `scripts/`, `references/` e `assets/` são relativos à própria pasta `edicao/`; rode os comandos a partir dela ou use caminhos absolutos. Os pacotes AE/Premiere ficam nos `scripts/` e `references/entregas.md` deste guia principal.
 
@@ -31,7 +31,7 @@ Após a escolha, recolha apenas os dados que faltam: objetivo e público, materi
 
 Depois do briefing e da análise do material, **devolva 2–3 ideias distintas** quando houver escolha criativa. Mostre gancho, estilo visual, estrutura, áudio, duração e o que será entregue; recomende uma e espere o usuário escolher. Em seguida, apresente um **roteiro ou plano de edição com tempos**, incluindo texto, cenas/cortes, motion e SFX relevantes. Para vídeo gerado do zero ou motion livre, detalhe **segundo a segundo**. Espere a aprovação explícita desse plano antes de gerar voz, trilha, imagens, animações ou renderizar. Se o usuário já trouxer um conceito aprovado, não invente alternativas: apresente o roteiro/plano temporal para aprovação. Mudanças criativas relevantes durante a produção voltam para aprovação.
 
-Analisar arquivos, transcrever material e estimar custos são etapas de preparação permitidas antes dessa aprovação. A confirmação especial de custo do remake 1:1 em `edicao/SKILL.md` continua obrigatória antes da análise detalhada. A aprovação do custo não substitui a aprovação posterior do conceito e da copy/plano.
+Analisar arquivos, transcrever material e estimar custos são etapas de preparação permitidas antes dessa aprovação. A confirmação especial de custo do remake 1:1 em `edicao/GUIA.md` continua obrigatória antes da análise detalhada. A aprovação do custo não substitui a aprovação posterior do conceito e da copy/plano.
 
 O que já foi produzido com este processo (use como régua de qualidade):
 - **Kinetic/HUD 15s** (CRM de pós-venda): tipografia cinética, HUD, motion blur, trilha eletrônica sincronizada no beat.
@@ -127,7 +127,7 @@ Mix (`references/audio-mix.md`): narração com offset ~0,35–0,4 s; trilha com
 - Contact sheet 1 fps do vídeo final e olhe de verdade (texto cortado na borda, sobreposições, quadros vazios, layout quebrado em outro idioma).
 - Transcreva o áudio final (`words.py --text`) e compare com o roteiro — pega SFX mascarando fala e música alta.
 - `ffprobe`/ebur128: duração, ~−14 LUFS, pico ≤ −1 dB, estéreo, 1080p60.
-Corrija e re-renderize; só então entregue com `SendUserFile` + resumo curto (o que tem em cada cena, o que precisa da atenção do usuário).
+Corrija e re-renderize; só então entregue o arquivo pela função de envio da interface ou por um link local acessível, com um resumo curto do que precisa da atenção do usuário.
 
 ## 10. Entregas extras
 
@@ -149,7 +149,7 @@ Ver `references/entregas.md`:
 
 ## Manutenção da skill (repositório do time)
 
-Esta skill vive no GitHub (`KaiqueNascimentoV4/promo-video-studio`, plugin marketplace) e o time recebe as mudanças por auto-update. Quando você aprender algo que vale para os próximos vídeos (um bug corrigido num script, uma API que mudou, uma técnica nova aprovada pelo usuário, uma preferência de gosto), **atualize a skill e publique**:
+Esta skill vive no GitHub (`KaiqueNascimentoV4/promo-video-studio`) e pode ser instalada no Claude Code ou no Codex. Quando você aprender algo que vale para os próximos vídeos (um bug corrigido num script, uma API que mudou, uma técnica nova aprovada pelo usuário, uma preferência de gosto), **atualize a skill e prepare a publicação**:
 1. Edite os arquivos da skill (generalize: nada de nomes de clientes, roteiros reais, caminhos da sua máquina ou dados sensíveis — o repositório é público).
-2. Rode `python scripts/publicar.py "mensagem curta do que mudou"` (na pasta da skill) — ele bloqueia tokens/caminhos/e-mails, valida, faz commit e push. Se você não tiver permissão de escrita no repositório, prepare as mudanças e sugira um pull request.
+2. Valide as mudanças e siga o fluxo de contribuição do repositório. `scripts/publicar.py` faz commit e push; use-o somente quando a publicação tiver sido autorizada. Se não houver permissão de escrita, prepare um pull request.
 Mudanças pontuais de um projeto (cores, textos de um cliente) não entram na skill.

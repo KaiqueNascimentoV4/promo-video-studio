@@ -1,0 +1,20 @@
+{
+  "name": "promo-video-studio",
+  "interface": {
+    "displayName": "Promo Video Studio"
+  },
+  "plugins": [
+    {
+      "name": "promo-video-studio",
+      "source": {
+        "source": "local",
+        "path": "./plugins/promo-video-studio"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

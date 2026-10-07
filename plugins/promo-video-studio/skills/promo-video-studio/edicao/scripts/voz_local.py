@@ -32,7 +32,8 @@ for _s in (sys.stdout, sys.stderr):
 
 def cfg_python():
     try:
-        with open(os.path.expanduser('~/.claude/editar-video.json'), encoding='utf-8') as f: return json.load(f).get('voz_python') or VPY
+        path = os.path.expanduser(os.environ.get('PROMO_VIDEO_STUDIO_CONFIG', '~/.claude/editar-video.json'))
+        with open(path, encoding='utf-8') as f: return json.load(f).get('voz_python') or VPY
     except Exception: return VPY
 
 

@@ -12,7 +12,7 @@ Vídeo **100% motion**, sem takes de câmera como base: kinetic typography, UI d
 5. **Material do cliente**: logo/MIV, prints ou gravação do produto, fotos, vídeos.
 6. **Copy**: pronta ou gerar pelo contexto (`copy.md`)?
 
-Depois, com AskUserQuestion: B (formato/duração), D (trilha + SFX), E (CTA) e C se houver fala.
+Depois, pergunte B (formato/duração), D (trilha + SFX), E (CTA) e C se houver fala, pela ferramenta de perguntas disponível ou em texto.
 
 ## 2. Conceito antes de animar
 - Proponha **2–3 conceitos** em 3–4 linhas cada (gancho dos primeiros 2 s, mundo visual, movimento-assinatura, o momento "espera, ele faz isso?"), **recomende um** e espere a escolha.

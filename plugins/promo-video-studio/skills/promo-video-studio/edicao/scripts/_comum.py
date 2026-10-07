@@ -5,7 +5,7 @@ for _s in (sys.stdout, sys.stderr):
     try: _s.reconfigure(encoding='utf-8', errors='replace')
     except Exception: pass
 
-CONFIG = os.path.expanduser('~/.claude/editar-video.json')
+CONFIG = os.path.expanduser(os.environ.get('PROMO_VIDEO_STUDIO_CONFIG', '~/.claude/editar-video.json'))
 FORMATOS = {'9:16': (1080, 1920), '4:5': (1080, 1350), '1:1': (1080, 1080), '16:9': (1920, 1080)}
 
 

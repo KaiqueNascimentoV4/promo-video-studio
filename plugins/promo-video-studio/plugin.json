@@ -1,0 +1,11 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "promo-video-studio",
+  "version": "1.0.0",
+  "description": "Crie e edite vídeos com briefing, aprovação prévia de roteiro, motion, áudio e entregas editáveis.",
+  "author": {
+    "name": "Kaique Nascimento"
+  },
+  "repository": "https://github.com/KaiqueNascimentoV4/promo-video-studio",
+  "keywords": ["video", "reels", "motion", "edicao", "after-effects", "premiere"]
+}

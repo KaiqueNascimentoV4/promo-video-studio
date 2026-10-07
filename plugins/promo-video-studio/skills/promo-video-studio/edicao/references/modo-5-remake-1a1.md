@@ -5,7 +5,7 @@ Pega um vídeo que o cliente amou (de outra marca, de um creator, de um lançame
 **É obrigatório executar pelo prompt de `assets/prompt-remake.md`** (fases 0–3 + complementos).
 
 ## 1. Aviso de custo, antes de tudo
-Use o texto do SKILL.md §5. Números reais para dar a dimensão: um filme de 73 s / 1752 quadros a 4K teve análise com 57 trilhas medidas por quadro, 4 agentes de plano mais 1 de áudio, várias rodadas de `compare`, ~25 min só no render final e 3 versões de revisão. Ofereça o **modo 4 inspirado na referência** como alternativa barata ("mesma vibe, não quadro a quadro").
+Use o texto de `../GUIA.md` §5. Números reais para dar a dimensão: um filme de 73 s / 1752 quadros a 4K teve análise com 57 trilhas medidas por quadro, 4 grupos de planos mais áudio, várias rodadas de `compare`, ~25 min só no render final e 3 versões de revisão. Ofereça o **modo 4 inspirado na referência** como alternativa barata ("mesma vibe, não quadro a quadro").
 
 Siga só com um "sim" explícito.
 
@@ -46,8 +46,8 @@ node render.mjs stills 0,10,20                              # o kit roda (shot d
 
 ## 4. Fases (resumo; o prompt manda)
 - **Fase 0: análise.** Nada de construir. Medir com numpy, nunca no olho. `SPEC.md` com a tabela de planos, o texto literal na ordem, os tokens de cor amostrados, os tamanhos pela altura de caixa-alta, os caminhos do cursor e os quadros-chave de câmera. Áudio: tabela de narração, BPM e fase, drop, arco de loudness, SFX.
-- **Fase 1: engine** (você, antes dos agentes). Kit pronto; ajuste `project.js` e `brand.js` (bandas de troca de cor: a cor da marca antiga é re-matizada para a nova com a luminosidade preservada; bitmaps intocados).
-- **Fase 2: build paralelo.** 4 agentes (Agent tool), grupos contíguos de planos, cada um escreve só `shots/<G>.js`; o 5.º faz o áudio (trilha licenciada, SFX sintetizados nos tempos da ref, slots de VO). Dê a cada um: `BRIEF.md` (modelo em `assets/remake-kit/BRIEF.template.md`), a seção da spec e a API do core.
+- **Fase 1: engine.** Kit pronto; ajuste `project.js` e `brand.js` (bandas de troca de cor: a cor da marca antiga é re-matizada para a nova com a luminosidade preservada; bitmaps intocados).
+- **Fase 2: construção.** Divida os planos em 4 grupos contíguos, cada um em `shots/<G>.js`, e trate o áudio separadamente. Execute os grupos em sequência; se o ambiente oferecer agentes paralelos e o usuário tiver autorizado esse modo de trabalho, distribua cada grupo com `BRIEF.md` (modelo em `assets/remake-kit/BRIEF.template.md`), sua seção da spec e a API do core.
 - **Fase 3: integrar.** Unificar componentes compartilhados (cursor, janela, logo), render completo em 2–3 blocos, `encode.py`, `sync.py`, folhas ref|nosso a 1 q/s e nas costuras entre grupos, varredura de cor da marca antiga, VO por linha.
 
 ## 5. Ética e direitos (dizer ao usuário quando for o caso)

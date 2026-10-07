@@ -1,4 +1,4 @@
-"""Configuração LOCAL da skill (fica em ~/.claude/editar-video.json, nunca no repositório).
+"""Configuração LOCAL da skill (PROMO_VIDEO_STUDIO_CONFIG ou ~/.claude/editar-video.json; nunca no repositório).
 
   python config.py --show                     mostra a config
   python config.py --check                    confere ferramentas e caminhos e diz o que falta

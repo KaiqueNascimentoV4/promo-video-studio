@@ -6,7 +6,7 @@
 | ffmpeg ≥ 6 com libass, zscale, tonemap | Windows: `winget install Gyan.FFmpeg` (build full) · Mac: `brew install ffmpeg` | tudo |
 | Python 3.10+ | `pip install faster-whisper numpy opencv-python pillow` | scripts |
 | Node 18+ e Playwright | `npm i -g playwright` (ou na pasta do projeto) + `npx playwright install chromium` | motion HTML, remake |
-| (opcional) HyperFrames | `npx hyperframes@latest doctor`; skills: `npx skills add heygen-com/hyperframes --agent claude-code` | motion HTML com GSAP, legendas embutidas, recorte |
+| (opcional) HyperFrames | `npx hyperframes@latest doctor`; siga a instalação compatível com o agente em uso | motion HTML com GSAP, legendas embutidas, recorte |
 | (opcional) recorte da pessoa | `pip install rembg onnxruntime` (sessão `u2net_human_seg`) ou `npx hyperframes remove-background` | modo 1 |
 | (opcional) GPU NVIDIA para Whisper | `pip install nvidia-cudnn-cu12==8.9.7.29 nvidia-cublas-cu12==12.4.5.8` (o `transcrever.py` acha as DLLs sozinho) | transcrição ~10× mais rápida |
 | (opcional) Real-ESRGAN / RIFE | binários ncnn-vulkan | upscale e interpolação de footage fraco |
@@ -15,7 +15,7 @@
 
 `python scripts/config.py --check` confere tudo e diz o que falta.
 
-## 2. Configuração local (`~/.claude/editar-video.json`, fora do repo)
+## 2. Configuração local (`PROMO_VIDEO_STUDIO_CONFIG` ou `~/.claude/editar-video.json`, fora do repo)
 ```bash
 python scripts/config.py --set sfx "D:/Packs/SFX"
 python scripts/config.py --set trilhas "D:/Packs/Trilhas sonoras"

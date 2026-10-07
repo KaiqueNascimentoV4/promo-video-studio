@@ -1,6 +1,6 @@
 # PROMPT OBRIGATÓRIO: remake 1:1 frame-locked
 
-No modo 5, preencha os campos `[...]` com o que o usuário e o MIV deram, mostre a versão preenchida ao usuário e **execute exatamente por ela**. Não pule fases nem afrouxe o ACCEPTANCE. O bloco original (em inglês) fica abaixo, sem alteração de conteúdo. Só os falsos links `http://` que o colar criou em `window.seek(t)`, `sync.py` e `encode.py` foram limpos. Os **complementos** depois dele são lições de execução real e também valem.
+No modo 5, preencha os campos `[...]` com o que o usuário e o MIV deram, mostre a versão preenchida ao usuário e siga suas fases e critérios de aceite. A divisão de grupos pode ser sequencial em qualquer agente; paralelize somente quando o ambiente oferecer esse recurso e o usuário tiver autorizado. Os **complementos** depois do bloco são lições de execução real.
 
 ---
 
@@ -14,18 +14,18 @@ PHASE 0 — ANALYSIS (no building yet)
 - MEASURE with numpy on ref frames (ink bounding boxes, flood fills, template match), never eyeball. Store per-frame sample arrays for every major move; the spec's prose is a guide, ref/full is truth.
 - Audio: STT with word timestamps (narration table: line, start, end, text). Music BPM + beat phase (onset autocorrelation), drop time, loudness arc per section, hard-stop time. SFX hit times from onset/spectral analysis. Voice pitch/wpm.
 
-PHASE 1 — ENGINE (you, before any agents)
+PHASE 1 — ENGINE
 - Single HTML page, stage at REF native resolution. window.seek(t) renders frame F=t*fps as a PURE function of F: no timers, no Date, no Math.random (seeded hash), no CSS transitions/animations. Shots register SHOT({id,f0,f1,render(lf,F)}) returning HTML; seek routes F to its shot. window.ready=true only after document.fonts loaded + all images decoded.
 - core.js shared helpers: easing set, kf(F,keys,ease), samples(F,f0,arr) interpolating measured arrays, camera(inner,scale,tx,ty,origin,blur), directional motion blur (SVG feGaussianBlur), cursor (glyph MEASURED from ref, press-scale curve measured), ripple, text reveal, brand tokens, logo component (mask-image of logo so any fill/gradient works), avatar/persona pickers.
 - Palette swap as ONE deterministic filter applied to each rendered HTML string (hex/rgb/rgba re-hued by band, lightness preserved) so hard-coded colours in shots can't leak the old brand. Bitmaps untouched.
 - render.mjs (Playwright Chromium, deviceScaleFactor 1): modes stills <frames> | compare <frames> (ref left | ours right + labelled sheet) | full <f0> <f1>. Per-agent OUT dirs so parallel runs don't collide. Print page errors.
 - sync.py: REF over remake stacked, frame-locked mp4. encode.py: PNG frames → h264 at REF fps, mux audio.
 
-PHASE 2 — PARALLEL BUILD
-- Split shots into 4 contiguous groups; one agent each; each writes ONLY shots/<G>.js (IIFE, helpers prefixed <G>_), never edits core.js (request changes from you). Give each: BRIEF.md (acceptance bar, swap rules, file rules, verify loop), SPEC.md sections, core.js API.
-- Verify loop per shot: compare first/last frame, every keyframe, 2 frames into each transition; iterate until within tolerance. ≤15 frames per render call; one render at a time per agent.
+PHASE 2 — BUILD BY GROUP
+- Split shots into 4 contiguous groups; each group writes ONLY shots/<G>.js (IIFE, helpers prefixed <G>_), never edits core.js. Work sequentially by default; parallel agents are optional when available and authorized. For each group, use BRIEF.md (acceptance bar, swap rules, file rules, verify loop), SPEC.md sections, core.js API.
+- Verify loop per shot: compare first/last frame, every keyframe, 2 frames into each transition; iterate until within tolerance. ≤15 frames per render call; avoid concurrent renders that compete for the same output.
 - Report table: shot | frames | MATCHES/CLOSE/ROUGH | residual diff | frames that would drift when stacked | spec errors found vs ref.
-- 5th agent = audio: royalty-free commercial-OK track (record URL+licence), time-stretch to REF BPM, cut on beats so drop/breaks/silences land on REF times; SFX synthesized (numpy) on REF hit times; mix script with VO slot table (REF start times, text swapped) that fits each line (≤8% stretch), ducks music under voice, loudness-normalizes (~-14 LUFS, TP ≤ -1). Never reuse REF music or voice.
+- Audio workstream: royalty-free commercial-OK track (record URL+licence), time-stretch to REF BPM, cut on beats so drop/breaks/silences land on REF times; SFX synthesized (numpy) on REF hit times; mix script with VO slot table (REF start times, text swapped) that fits each line (≤8% stretch), ducks music under voice, loudness-normalizes (~-14 LUFS, TP ≤ -1). Never reuse REF music or voice.
 
 PHASE 3 — INTEGRATE
 - Unify shared glyphs/components across groups (cursor, DM window, logo) — one definition, everyone uses it.

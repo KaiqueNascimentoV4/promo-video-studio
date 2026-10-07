@@ -1,9 +1,8 @@
 # Banco de perguntas do briefing
 
-Textos prontos para o **AskUserQuestion**: no máximo 4 perguntas por chamada e 2–4 opções por pergunta. O "Outro" aparece sozinho. A opção recomendada vai primeiro, com "(Recomendado)".
-Faça **uma ou duas chamadas** por rodada, nunca um interrogatório. Pule o que o usuário já disse ou o que dá para descobrir sozinho (resolução e fps vêm do `inventario.py`, não pergunte).
+Textos prontos para o formulário: apresente poucas perguntas por rodada, com 2–4 opções cada. Use a ferramenta de perguntas disponível no Claude Code ou no Codex; sem ela, mostre opções numeradas em texto. Ponha a opção recomendada primeiro. Pule o que o usuário já disse ou o que dá para descobrir sozinho (resolução e fps vêm do `inventario.py`, não pergunte).
 
-Perguntas de **texto livre** (caminho de pasta, contexto do cliente, link) não cabem no AskUserQuestion. Faça em uma mensagem curta, numerada, e espere a resposta.
+Para respostas de **texto livre** (caminho de pasta, contexto do cliente, link), use uma mensagem curta e numerada e espere a resposta.
 
 ---
 
@@ -105,7 +104,7 @@ Modo 4: o briefing de ideia está em `modo-4-motion-complexo.md` §1. A ideia po
 
 ## I. Modo 5 (remake)
 
-Primeiro o **aviso de custo** (SKILL.md §5) e o "sim". Depois, em texto livre e numerado:
+Primeiro o **aviso de custo** (`../GUIA.md` §5) e o "sim". Depois, em texto livre e numerado:
 1. O vídeo de referência (arquivo ou link).
 2. O **MIV do cliente** (ou logo + site + Instagram).
 3. O que troca: nome da marca, logo, paleta (hex ou "derivar do logo"), UI de plataforma (ex.: LinkedIn → Instagram), rostos/telas (de onde vêm as imagens do cliente).
