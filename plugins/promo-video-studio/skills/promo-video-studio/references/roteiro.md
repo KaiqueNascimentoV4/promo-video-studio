@@ -12,7 +12,7 @@
 
 ## 1. Apresentar conceitos
 
-Dê 2–3 ideias, cada uma com: nome curto, o gancho, como fica visualmente, o tom. Marque uma como recomendada e escreva o roteiro completo só dela (com duração estimada). Termine perguntando qual seguir e lembrando o custo de créditos se for gerar áudio. O usuário escolhe rápido quando as opções são distintas de verdade (didático × engraçado × emocional; com pessoas × sem pessoas).
+Dê 2–3 ideias, cada uma com: nome curto, o gancho, como fica visualmente, o tom. Marque uma como recomendada e **espere o usuário escolher**. Depois escreva o roteiro completo da opção escolhida, com cenas, texto, áudio e movimentos **segundo a segundo**; espere a aprovação explícita antes de gerar qualquer material ou produzir. Lembre o custo de créditos se for gerar áudio. O usuário escolhe melhor quando as opções são distintas de verdade (didático × engraçado × emocional; com pessoas × sem pessoas).
 
 ## 2. Formatos que funcionaram
 

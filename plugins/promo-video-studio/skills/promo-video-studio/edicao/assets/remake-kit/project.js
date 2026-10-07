@@ -1,0 +1,2 @@
+/* gerado por tools/analisar_ref.py a partir de project.json — edite o JSON e rode: python tools/analisar_ref.py --so-project */
+window.PROJECT = {"W": 1920, "H": 1080, "FPS_NUM": 30, "FPS_DEN": 1, "TOTAL": 90, "VIEW_SCALE": 1, "REF_FULL": "ref/full", "REF_HALF": "ref/half", "FONT": {"sans": "'Inter', Arial, sans-serif", "mono": "'JetBrains Mono', monospace"}, "FONTS_LOAD": [["Inter", 400], ["Inter", 700]], "TIMEMAP": null};

@@ -1,12 +1,14 @@
 {
   "name": "promo-video-studio",
-  "description": "Skill de criação de vídeos promocionais do time (roteiro, ElevenLabs, animação, render, mix e pacotes editáveis).",
-  "owner": { "name": "Kaique Nascimento" },
+  "description": "Skill única de vídeo do time: criação promocional, edição de Reels, legendas, cor, SFX, motion e remake, com briefing e aprovação antes da produção.",
+  "owner": {
+    "name": "Kaique Nascimento"
+  },
   "plugins": [
     {
       "name": "promo-video-studio",
       "source": "./plugins/promo-video-studio",
-      "description": "Vídeos promocionais com animação HTML + ElevenLabs, com pacotes editáveis para After Effects e Premiere."
+      "description": "Formulário inicial para criação e edição de vídeos, com roteiros aprovados e entregas editáveis para After Effects e Premiere."
     }
   ]
 }

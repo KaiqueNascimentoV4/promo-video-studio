@@ -1,11 +1,37 @@
 ---
 name: promo-video-studio
-description: Produz vídeos de marketing/promo/comerciais de produto (motion design, tipografia cinética, telas de produto animadas, com ou sem fotos) renderizados de HTML via Chromium headless + ffmpeg, com narração, trilha, efeitos e imagens gerados no ElevenLabs. Use SEMPRE que o usuário pedir um vídeo promocional, comercial, anúncio, showreel, vídeo de lançamento, vídeo para Instagram/Reels/LinkedIn de um produto/sistema/empresa, "um vídeo nessa pegada" com uma referência (mp4, landing page, site), versão traduzida/dublada de um vídeo, roteiro de comercial, ou pacote editável para Premiere — mesmo que não diga "motion design" nem "ElevenLabs".
+description: Central única do time para criar ou editar vídeos. Use quando pedirem "editar video iniciar", vídeo promocional, comercial, anúncio, showreel, lançamento, Reels/TikTok/Shorts, edição de takes, decupagem, legenda, cor, SFX, trilha, motion, remake de referência, versão traduzida ou pacote editável para After Effects/Premiere. Comece pelo formulário de escolha e obtenha aprovação de conceito e roteiro antes de produzir.
 ---
 
 # Promo Video Studio
 
-Pipeline para criar vídeos promocionais de alto nível (estilo comercial de SaaS: monday.com, Apple) sem editor de vídeo: cada quadro é renderizado de uma página HTML animada por código (determinística por tempo), e o áudio vem do ElevenLabs. Isso dá precisão de quadro, sincronia exata com a narração, e permite refazer qualquer coisa em minutos.
+Central única para vídeos promocionais e edição de material bruto. Para comerciais criados do zero, cada quadro pode ser renderizado de uma página HTML animada por código, com áudio do ElevenLabs ou voz local. Para takes, legendas, cor, SFX, motion livre e remake, use os fluxos em `edicao/`.
+
+## Formulário inicial e escolha do fluxo
+
+Quando o usuário disser `editar video iniciar`, pedir um vídeo ou uma edição sem detalhar o fluxo, apresente o formulário em duas rodadas curtas. Use `AskUserQuestion` se disponível (até quatro opções por pergunta); em outra interface, mostre as opções numeradas em texto. **Não repita perguntas já respondidas no pedido.**
+
+**Rodada 1 — O que vamos fazer?**
+
+| opção | quando escolher | próximo passo |
+|---|---|---|
+| Criar comercial ou vídeo de lançamento | Vídeo de produto do zero, roteiro e motion promocional | Este `SKILL.md`, §1–10 |
+| Editar gravações | Takes de cliente, Reels, Shorts ou TikTok | Perguntar o nível de edição abaixo |
+| Criar motion ou refazer referência | Vídeo sem takes como base ou remake 1:1 | Perguntar se é motion livre ou remake |
+| Ainda não sei | Usuário quer ajuda para definir o formato | Perguntar objetivo, material disponível e referência; recomendar uma opção |
+
+**Rodada 2 — somente para o caminho escolhido:**
+
+- **Editar gravações:** `1 · Reels completo` (cortes, legenda, cor, trilha, SFX e cenas de motion); `2 · Reels intermediário` (sem cenas de motion); `3 · Decupagem + legenda` (sem trilha/SFX criativos). Leia `edicao/SKILL.md` e o arquivo do modo em `edicao/references/`.
+- **Motion ou referência:** `4 · Motion livre` (ideia original ou inspirada em referência); `5 · Remake 1:1` (reconstrução quadro a quadro, com aviso de custo). Leia `edicao/SKILL.md` e o arquivo do modo. A análise e os arquivos editáveis de After Effects/Premiere deste guia continuam disponíveis no modo 4.
+
+Após a escolha, recolha apenas os dados que faltam: objetivo e público, material e referência, marca/MIV, formato e duração, texto ou fala, áudio desejado e entrega final (MP4, fontes, **After Effects editável**, Premiere editável). O briefing específico do fluxo completa o formulário. Nos guias de `edicao/`, caminhos como `scripts/`, `references/` e `assets/` são relativos à própria pasta `edicao/`; rode os comandos a partir dela ou use caminhos absolutos. Os pacotes AE/Premiere ficam nos `scripts/` e `references/entregas.md` deste guia principal.
+
+## Aprovação antes de produzir
+
+Depois do briefing e da análise do material, **devolva 2–3 ideias distintas** quando houver escolha criativa. Mostre gancho, estilo visual, estrutura, áudio, duração e o que será entregue; recomende uma e espere o usuário escolher. Em seguida, apresente um **roteiro ou plano de edição com tempos**, incluindo texto, cenas/cortes, motion e SFX relevantes. Para vídeo gerado do zero ou motion livre, detalhe **segundo a segundo**. Espere a aprovação explícita desse plano antes de gerar voz, trilha, imagens, animações ou renderizar. Se o usuário já trouxer um conceito aprovado, não invente alternativas: apresente o roteiro/plano temporal para aprovação. Mudanças criativas relevantes durante a produção voltam para aprovação.
+
+Analisar arquivos, transcrever material e estimar custos são etapas de preparação permitidas antes dessa aprovação. A confirmação especial de custo do remake 1:1 em `edicao/SKILL.md` continua obrigatória antes da análise detalhada. A aprovação do custo não substitui a aprovação posterior do conceito e da copy/plano.
 
 O que já foi produzido com este processo (use como régua de qualidade):
 - **Kinetic/HUD 15s** (CRM de pós-venda): tipografia cinética, HUD, motion blur, trilha eletrônica sincronizada no beat.
@@ -23,7 +49,7 @@ O que já foi produzido com este processo (use como régua de qualidade):
 
 1. **Briefing + referências** → entender produto, público, canal, duração, idioma.
 2. **Análise da referência** (vídeo e/ou landing) → ritmo, estrutura, linguagem visual, identidade.
-3. **Conceito + roteiro** → 2–3 ideias curtas, usuário escolhe; roteiro final com tempos.
+3. **Conceito + roteiro** → 2–3 ideias curtas, usuário escolhe; roteiro final segundo a segundo, usuário aprova.
 4. **Áudio no ElevenLabs** → narração (2 takes), trilha (2 variações), SFX.
 5. **Sincronia** → transcrever a narração com tempo por palavra → arquivo de âncoras.
 6. **Animação HTML** → cenas amarradas às âncoras (template em `assets/template.html`).
@@ -40,6 +66,7 @@ Mantenha o usuário informado em cada fase com frases curtas, e mostre opções 
 - Referência de estilo (vídeo, landing, site). Se houver landing, ela é a fonte da identidade e do copy.
 - Duração. **Prefira 30–45s com narração** a 15s acelerado: o feedback recorrente foi "passou informação rápido demais". Texto na tela precisa ficar ≥ ~2,4 s para ser lido.
 - Idioma(s). Com fotos de pessoas ou não (ver abaixo).
+- **Voz**: ElevenLabs (pago por crédito) ou **voz local** (grátis, gerada no PC: `references/voz-local.md`)? Sem créditos ou sem conector, use a local.
 - Créditos ElevenLabs disponíveis — cada narração ~700 créditos, cada trilha ~700, imagem Nano Banana Pro 2K ~1.200–1.800. Se uma geração falhar com "Insufficient funds", avise na hora; não deixe o usuário escolher uma opção que não existe.
 
 ## 2. Análise de referência
@@ -54,14 +81,17 @@ Para **landing page** (HTML local ou URL): renderize com Playwright, troque para
 ## 3. Conceito e roteiro
 
 Leia `references/roteiro.md`. Resumo:
-- Ofereça **2–3 conceitos** em 3–4 linhas cada (gancho, visual, tom), recomende um, e escreva o roteiro completo só do recomendado. O usuário escolhe.
+- Ofereça **2–3 conceitos** em 3–4 linhas cada (gancho, visual, tom), recomende um e espere a escolha. Escreva o roteiro completo do escolhido com cenas segundo a segundo e espere aprovação explícita antes da produção.
 - Formatos que funcionaram: **gancho de dado** ("o cliente fala 5.000 palavras, você anota 12"), **personagem + apelidos** (estilo monday), **kinetic + HUD** (curtos, sem narração).
 - **Menos texto na tela, mais narração.** A tela mostra produto e metáforas visuais; a voz conta. Textos de tela = rótulos curtos, números, anotações à mão.
 - Fotos de pessoas geradas por IA dividiram opiniões (o usuário preferiu "sem imagens de pessoas"). Motion design + telas do produto é o padrão seguro; use fotos só se o usuário fornecer ou pedir. Se precisar de imagens dele, entregue um **briefing de imagens** (formato, protagonista consistente, área livre para anotações por foto) — modelo em `references/roteiro.md`.
 - Feche com callback ao gancho + tagline da marca + CTA. Use o copy oficial da landing quando existir.
 - Duração da fala: ~2,6–2,9 palavras/s em PT/ES com v4 (roteiro de ~115 palavras ≈ 41–45 s).
 
-## 4. Áudio no ElevenLabs
+## 4. Áudio no ElevenLabs (ou voz local)
+
+**Narração sem ElevenLabs:** `python scripts/voz_local.py --roteiro roteiro.txt --motor chatterbox --takes 2` gera a locução no próprio PC (Chatterbox Multilingual/Kokoro, uso comercial liberado). Instalação, parâmetros de emoção/ritmo e clonagem autorizada em `references/voz-local.md`. O resto do fluxo (âncoras, mix) é igual.
+
 
 Leia `references/elevenlabs.md` antes de gerar. Essenciais:
 - **Voz**: modelo `eleven_v4` (melhor; aceita tags `[warmly] [chuckles] [mischievously] [pause]`). Busque vozes com `creative_list_voices` (idioma, `voice_category: high_quality`, `sort: usage_character_count_1y`, use_cases advertisement/conversational). Gere 2 takes; para escolha de voz, gere o roteiro inteiro em 2–3 vozes e deixe o usuário ouvir.

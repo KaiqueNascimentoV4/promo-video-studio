@@ -1,6 +1,6 @@
 {
   "name": "promo-video-studio",
-  "description": "Vídeos promocionais de alto nível (comerciais de SaaS, produtos, versões em outros idiomas) feitos com animação HTML renderizada quadro a quadro + ElevenLabs (voz, trilha, efeitos), com pacotes editáveis para After Effects e Premiere.",
+  "description": "Central única para criar e editar vídeos: formulário inicial, aprovação de roteiro, Reels, legendas, cor, SFX, motion, remake e pacotes editáveis para After Effects e Premiere.",
   "author": { "name": "Kaique Nascimento" },
-  "keywords": ["video", "motion", "elevenlabs", "after-effects", "premiere", "marketing"]
+  "keywords": ["video", "reels", "edicao", "motion", "elevenlabs", "after-effects", "premiere", "marketing"]
 }
