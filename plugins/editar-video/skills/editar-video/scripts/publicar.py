@@ -19,7 +19,7 @@ while root and not os.path.isdir(os.path.join(root, '.git')):
     up = os.path.dirname(root); root = None if up == root else up
 if not root:
     sys.exit(f'Esta cópia da skill não é um repositório git (provavelmente instalada como plugin).\n'
-             f'Para contribuir: git clone {REPO_URL}, aplique as mudanças em plugins/promo-video-studio/skills/promo-video-studio/ '
+             f'Para contribuir: git clone {REPO_URL}, aplique as mudanças em plugins/<plugin>/skills/<skill>/ '
              f'e abra um pull request (ou peça para quem mantém o repo publicar).')
 
 def git(*a, check=True): return subprocess.run(['git', '-C', root, *a], capture_output=True, text=True, encoding='utf-8', check=check)
@@ -27,11 +27,12 @@ def git(*a, check=True): return subprocess.run(['git', '-C', root, *a], capture_
 BAD = [(r'gh[pousr]_[A-Za-z0-9]{20,}', 'token do GitHub'), (r'sk-[A-Za-z0-9_-]{20,}', 'chave de API'), (r'xi-api-key|ELEVENLABS_API_KEY\s*=\s*\S+', 'chave ElevenLabs'),
        (r'[A-Za-z]:[\\/]+Users[\\/]+(?!<you>)[A-Za-z0-9_.-]+', 'caminho de usuário'), (r'/Users/(?!<you>)[a-z0-9_.-]+/', 'caminho de usuário'),
        (r'[A-Za-z0-9._%+-]+@(?!htfonts|anthropic)[A-Za-z0-9.-]+\.(com|br|io|net)\b', 'e-mail')]
-# nomes de clientes (lista LOCAL, fora do repo): ~/.claude/promo-video-studio-clientes.txt, um por linha
-_bl = os.path.expanduser('~/.claude/promo-video-studio-clientes.txt')
-if os.path.exists(_bl):
-    for nome in open(_bl, encoding='utf-8').read().splitlines():
-        if nome.strip() and not nome.startswith('#'): BAD.append((r'(?i)' + re.escape(nome.strip()), 'nome de cliente'))
+# nomes de clientes (listas LOCAIS, fora do repo), um por linha
+for _bl in ('~/.claude/promo-video-studio-clientes.txt', '~/.claude/editar-video-clientes.txt'):
+    _bl = os.path.expanduser(_bl)
+    if os.path.exists(_bl):
+        for nome in open(_bl, encoding='utf-8').read().splitlines():
+            if nome.strip() and not nome.startswith('#'): BAD.append((r'(?i)' + re.escape(nome.strip()), 'nome de cliente'))
 problems = []
 changed = [l[3:].strip().strip('"') for l in git('status', '--porcelain', '-uall').stdout.splitlines()]
 for rel in changed:

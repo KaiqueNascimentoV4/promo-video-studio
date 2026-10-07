@@ -40,6 +40,7 @@ Mantenha o usuário informado em cada fase com frases curtas, e mostre opções 
 - Referência de estilo (vídeo, landing, site). Se houver landing, ela é a fonte da identidade e do copy.
 - Duração. **Prefira 30–45s com narração** a 15s acelerado: o feedback recorrente foi "passou informação rápido demais". Texto na tela precisa ficar ≥ ~2,4 s para ser lido.
 - Idioma(s). Com fotos de pessoas ou não (ver abaixo).
+- **Voz**: ElevenLabs (pago por crédito) ou **voz local** (grátis, gerada no PC: `references/voz-local.md`)? Sem créditos ou sem conector, use a local.
 - Créditos ElevenLabs disponíveis — cada narração ~700 créditos, cada trilha ~700, imagem Nano Banana Pro 2K ~1.200–1.800. Se uma geração falhar com "Insufficient funds", avise na hora; não deixe o usuário escolher uma opção que não existe.
 
 ## 2. Análise de referência
@@ -61,7 +62,10 @@ Leia `references/roteiro.md`. Resumo:
 - Feche com callback ao gancho + tagline da marca + CTA. Use o copy oficial da landing quando existir.
 - Duração da fala: ~2,6–2,9 palavras/s em PT/ES com v4 (roteiro de ~115 palavras ≈ 41–45 s).
 
-## 4. Áudio no ElevenLabs
+## 4. Áudio no ElevenLabs (ou voz local)
+
+**Narração sem ElevenLabs:** `python scripts/voz_local.py --roteiro roteiro.txt --motor chatterbox --takes 2` gera a locução no próprio PC (Chatterbox Multilingual/Kokoro, uso comercial liberado). Instalação, parâmetros de emoção/ritmo e clonagem autorizada em `references/voz-local.md`. O resto do fluxo (âncoras, mix) é igual.
+
 
 Leia `references/elevenlabs.md` antes de gerar. Essenciais:
 - **Voz**: modelo `eleven_v4` (melhor; aceita tags `[warmly] [chuckles] [mischievously] [pause]`). Busque vozes com `creative_list_voices` (idioma, `voice_category: high_quality`, `sort: usage_character_count_1y`, use_cases advertisement/conversational). Gere 2 takes; para escolha de voz, gere o roteiro inteiro em 2–3 vozes e deixe o usuário ouvir.

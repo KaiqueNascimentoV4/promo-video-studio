@@ -35,11 +35,33 @@ A skill entra sozinha quando você pede um vídeo ("faz um vídeo de 30s para o 
 ```
 plugins/promo-video-studio/skills/promo-video-studio/
   SKILL.md                 fluxo completo (briefing → roteiro → áudio → animação → render → mix → QA → entregas)
-  references/              guias: elevenlabs, roteiro (formatos), animação, áudio/mix, entregas (AE/Premiere/redes/idiomas)
+  references/              guias: elevenlabs, voz local (grátis, no PC), roteiro (formatos), animação, áudio/mix, entregas (AE/Premiere/redes/idiomas)
   scripts/                 render.mjs, words.py, audio_profile.py, analyze_reference.py, mix.py, compress.py,
-                           premiere_package.py, ae_package.py, ae_sim.mjs, publicar.py
+                           premiere_package.py, ae_package.py, ae_sim.mjs, voz_local.py, publicar.py
   assets/                  template.html (engine de animação), ae_export.js, anchors.example.js, fonte manuscrita
 ```
+
+## Plugin 2: editar-video (central de edição)
+
+```
+/plugin install editar-video@promo-video-studio
+```
+
+Digite **`editar video iniciar`**. O Claude faz o briefing por perguntas e edita em um de 5 modos:
+
+| modo | o que entra |
+|---|---|
+| 1 · Reels completo | decupagem, legenda dinâmica, cor, SFX, trilha **e** cenas de motion (palavra atrás da pessoa, cartão de UI, CTA WhatsApp animado) |
+| 2 · Reels intermediário | decupagem, legenda dinâmica, SFX, música e color grading |
+| 3 · Decupagem + legenda | melhores takes no ritmo + legenda (voz limpa, sem trilha) |
+| 4 · Motion complexo | vídeo 100% motion de qualquer ideia (kinetic, UI, 3D, explainer desenhado, HUD…) |
+| 5 · Remake 1:1 | refaz um vídeo de referência quadro a quadro para um cliente (pede o MIV; gasta muito token; segue um prompt obrigatório) |
+
+Também gera **locução natural no próprio PC** (Chatterbox Multilingual / Kokoro, uso comercial liberado), sem custo por geração.
+Caminhos pessoais (pack de SFX, trilhas, fontes) ficam fora do repo em `~/.claude/editar-video.json` (`scripts/config.py`).
+Estrutura: `plugins/editar-video/skills/editar-video/` → `SKILL.md` (roteador + briefing), `references/` (um arquivo por modo + legenda,
+cor, áudio, motion, MIV, copy, QC), `scripts/` (inventário, transcrição, decupagem, corte, cor, batidas, legenda, SFX, mix, montagem,
+QC, voz local) e `assets/` (prompt de remake obrigatório + kit do motor de quadro).
 
 ## Contribuir
 

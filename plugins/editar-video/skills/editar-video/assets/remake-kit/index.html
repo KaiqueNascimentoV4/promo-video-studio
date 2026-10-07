@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>remake</title>
+<style>
+/* Fontes LOCAIS (pasta fonts/). Ex.: @font-face{font-family:'Inter';src:url(fonts/Inter.woff2) format('woff2');font-weight:100 900;font-display:block} */
+*{margin:0;padding:0;box-sizing:border-box;animation:none!important;transition:none!important}
+html,body{overflow:hidden;background:#000}
+#view{position:relative;overflow:hidden;background:#000}
+#stage{position:absolute;left:0;top:0;overflow:hidden;background:#000;color:#fff;transform-origin:0 0;
+  font-family:'Inter',Arial,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+</style>
+<script src="project.js"></script>
+<script>
+  (function () { const P = window.PROJECT, s = P.VIEW_SCALE || 1, w = Math.round(P.W * s), h = Math.round(P.H * s);
+    document.write(`<style>html,body,#view{width:${w}px;height:${h}px}#stage{width:${P.W}px;height:${P.H}px;transform:scale(${s})}</style>`); })();
+</script>
+<script src="brand.js"></script>
+</head>
+<body>
+<div id="view"><div id="stage"></div></div>
+<script src="core.js"></script>
+<script src="assets/footage/index.js" onerror="void 0"></script>
+<script src="shots/exemplo.js" onerror="void 0"></script>
+<script src="shots/G1.js" onerror="void 0"></script>
+<script src="shots/G2.js" onerror="void 0"></script>
+<script src="shots/G3.js" onerror="void 0"></script>
+<script src="shots/G4.js" onerror="void 0"></script>
+</body>
+</html>
